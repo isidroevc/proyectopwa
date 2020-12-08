@@ -1,0 +1,1 @@
+mysql -u root -e "source C:\var\spring\workspace\proyectopwa\database.sql"
