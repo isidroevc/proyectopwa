@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 
 
 @Entity
@@ -36,7 +37,15 @@ public class Usuario implements Serializable{
 	private String password;
 
 	private Boolean enabled;
-
+	@NotEmpty
+	@Column(name="nombre")
+	private String nombre;
+	@NotEmpty
+	@Column(name="primer_apellido")
+	private String primerApellido;
+	@NotEmpty
+	@Column(name="segundo_apellido")
+	private String segundoApellido;
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "user_id")
 	private List<Role> roles;
@@ -80,6 +89,32 @@ public class Usuario implements Serializable{
 	public void setRoles(List<Role> roles) {
 		this.roles = roles;
 	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public String getPrimerApellido() {
+		return primerApellido;
+	}
+
+	public void setPrimerApellido(String primerApellido) {
+		this.primerApellido = primerApellido;
+	}
+
+	public String getSegundoApellido() {
+		return segundoApellido;
+	}
+
+	public void setSegundoApellido(String segundoApellido) {
+		this.segundoApellido = segundoApellido;
+	}
+	
+	
 	
 	
 }

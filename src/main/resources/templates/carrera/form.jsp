@@ -25,8 +25,10 @@
         </div>
         <div class="form-group">
           <label for="idJefe">Jefe</label>
-          <input th:field="*{idJefe}" type="text" class="form-control" id="idJefe">
-          
+          <select th:field="*{idJefe}" id="idJefe" class="form-control">
+            <option value="0">Seleccionar Jefe</option>
+          	<option th:each="usuario : ${usuarios}" th:value="${usuario.id}" th:text="${usuario.nombre}" th:selected="${carrera.idJefe == usuario.id}"></option>
+          </select>
           <small class="form-text text-danger" th:if="${#fields.hasErrors('idJefe')}" th:errors="*{idJefe}"></small>
         </div>
         <button type="submit" class="btn btn-primary">Guardar</button>

@@ -38,7 +38,7 @@ public class CarreraController {
 	}
 	
 	@GetMapping("/form.jsp")
-	public String mostrarFormularioCreacion(Model model, BindingResult bindingResult) {
+	public String mostrarFormularioCreacion(Model model) {
 		Carrera carrera = new Carrera();
 		List<Usuario> usuarios = usuarioService.findAll();
 		model.addAttribute("usuarios", usuarios);

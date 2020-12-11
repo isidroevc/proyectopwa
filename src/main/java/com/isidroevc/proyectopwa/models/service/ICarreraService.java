@@ -1,6 +1,6 @@
 package com.isidroevc.proyectopwa.models.service;
 
-import org.springframework.stereotype.Service;
+
 
 import com.isidroevc.proyectopwa.models.entity.Carrera;
 

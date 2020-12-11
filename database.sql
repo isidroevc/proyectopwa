@@ -2,20 +2,6 @@ drop database if exists proyectopwa;
 create database proyectopwa;
 ALTER DATABASE proyectopwa CHARACTER SET utf8 COLLATE utf8_general_ci;
 use proyectopwa;
-create table carreras(
-  id int primary key AUTO_INCREMENT,
-  nombre varchar(255) not null,
-  clave varchar(255) not null
-);
-
-create table materias(
-  id int primary key AUTO_INCREMENT,
-  id_carrera int not null,
-  nombre varchar(255) not null,
-  clave varchar(255) not null,
-  foreign key (id_carrera) references carreras(id)
-);
-
 
 create table users (
   id int primary key AUTO_INCREMENT,
@@ -25,6 +11,22 @@ create table users (
   nombre varchar(255),
   primer_apellido varchar(255),
   segundo_apellido varchar(255)
+);
+
+create table carreras(
+  id int primary key AUTO_INCREMENT,
+  id_jefe int,
+  nombre varchar(255) not null,
+  clave varchar(255) not null,
+  foreign key (id_jefe) references users(id)
+);
+
+create table materias(
+  id int primary key AUTO_INCREMENT,
+  id_carrera int not null,
+  nombre varchar(255) not null,
+  clave varchar(255) not null,
+  foreign key (id_carrera) references carreras(id)
 );
 
 CREATE TABLE authorities (

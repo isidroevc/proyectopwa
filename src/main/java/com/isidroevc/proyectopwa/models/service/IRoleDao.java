@@ -6,4 +6,5 @@ import com.isidroevc.proyectopwa.models.entity.Role;
 
 public interface IRoleDao extends CrudRepository<Role, Long>{
 	public void deleteByUserIdAndIdCarrera(Long userId, Long IdCarrera);
+	public void deleteByIdCarrera(Long idCarrera);
 }

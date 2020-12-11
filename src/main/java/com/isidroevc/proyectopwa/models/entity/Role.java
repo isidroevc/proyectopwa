@@ -19,7 +19,18 @@ public class Role implements Serializable {
 	private Long id;
 
 	private String authority;
+	@Column(name = "username")
+	private String username;
 	
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+
 	@Column(name = "id_carrera")
 	private Long idCarrera;
 	
