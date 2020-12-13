@@ -12,7 +12,7 @@
   <div class="container">
     <h1 th:text="${titulo}"></h1>
     <div class="row">
-      <a th:href="@{/carreras/} + ${carrera.id} + '/grupos/form.jsp'" class="col-md-1"> <button
+      <a th:href="@{/carreras/} + ${carrera.id} + '/grupos/form.jsp'" class="col-md-1"> <button sec:authorize="hasAuthority('JEFE')"
         class="btn btn-primary ">Crear grupo</button> </a>
       </a>
     </div>
@@ -59,7 +59,7 @@
               <th>Miercoles</th>
               <th>Jueves</th>
               <th>Viernes</th>
-              <th>Eliminar</th>
+              <th sec:authorize="hasAuthority('JEFE')">Eliminar</th>
             </tr>
           </thead>
           <tbody>
@@ -92,7 +92,7 @@
               <td th:if="${grupo.horario.dias == 'Ma-J-V'}"></td>
               <td th:if="${grupo.horario.dias == 'Ma-J-V'}" th:text="${grupo.horario.detalle}" ></td>
               <td th:if="${grupo.horario.dias == 'Ma-J-V'}" th:text="${grupo.horario.detalle}" ></td>
-               <td> <a th:href="@{/carreras/} + ${carrera.id} + '/grupos/' + ${grupo.id}+ '/eliminar.jsp'"><button
+               <td > <a sec:authorize="hasAuthority('JEFE')" th:href="@{/carreras/} + ${carrera.id} + '/grupos/' + ${grupo.id}+ '/eliminar.jsp'"><button
                   class="btn btn-danger" onclick="return confirm('Estas seguro de eliminar este grupo?')">Eliminar</button></a> </td>
             </tr>
           </tbody>

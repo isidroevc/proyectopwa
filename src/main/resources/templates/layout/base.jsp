@@ -39,6 +39,10 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
           <li class="nav-item active" sec:authorize="hasAuthority('JEFE')">
             <a class="nav-link" th:href="@{/carreras/menu.jsp}" >Mis carreras</a>
           </li>
+
+          <li class="nav-item active" sec:authorize="hasAuthority('PROFESOR')">
+            <a class="nav-link" th:href="@{/sabana.jsp}" >Mis grupos</a>
+          </li>
         </ul>
         <ul class="navbar-nav navbar-right">
 					<li sec:authorize="!isAuthenticated()"><a

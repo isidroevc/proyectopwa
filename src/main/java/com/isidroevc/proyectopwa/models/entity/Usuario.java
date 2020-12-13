@@ -167,11 +167,13 @@ public class Usuario implements Serializable{
 	@PrePersist
 	private void PrePersist() {
 		this.password = "$2y$12$c41vAyFBea4o4zFcDOufleekG2FKph0z5iut51nCzHFPH6d1VCNB6";
+		this.enabled = true;
 	}
 	
 	@PreUpdate
 	private void PreUpdate() {
 		this.password = "$2y$12$c41vAyFBea4o4zFcDOufleekG2FKph0z5iut51nCzHFPH6d1VCNB6";
+		this.enabled = true;
 	}
 	
 	

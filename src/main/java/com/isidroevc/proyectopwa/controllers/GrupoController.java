@@ -54,19 +54,20 @@ public class GrupoController {
 	@Autowired
 	IMateriaService materiaService;
 	@GetMapping(value="/carreras/{idCarrera}/sabana.jsp")
-	@PreAuthorize("hasAuthority('JEFE')")
+	@PreAuthorize("hasAnyAuthority('JEFE', 'PROFESOR')")
 	public String listar(@PathVariable Long idCarrera, @RequestParam Optional<Long> idProfesor, Model model, Authentication authentication) {
 		Usuario usuario = usuarioService.findByUsername(authentication.getName());
 		Carrera carrera = carreraService.findById(idCarrera);
-		if (!carrera.getIdJefe().equals(usuario.getId())) {
+		if (!usuario.getRole().equals("PROFESOR") && !carrera.getIdJefe().equals(usuario.getId())) {
 			return "redirect:/";
 		}
 		List<ProfesorTieneMateriaConHorario> grupos;
 		
-		if (idProfesor.isPresent() && idProfesor.get() > 0) {
-			Usuario profesor = usuarioService.findById(idProfesor.get());
-			grupos = grupoService.findByIdProfesor(idProfesor.get());
-			model.addAttribute("idProfesorActual", idProfesor.get());
+		if (idProfesor.isPresent() && idProfesor.get() > 0 || usuario.getRole().equals("PROFESOR")) {
+			Long idProfesorFiltro = usuario.getRole().equals("PROFESOR")? usuario.getId() : idProfesor.get();
+			Usuario profesor = usuario.getRole().equals("PROFESOR") ? usuario : usuarioService.findById(idProfesorFiltro);
+			grupos = grupoService.findByIdProfesor(idProfesorFiltro);
+			model.addAttribute("idProfesorActual", idProfesorFiltro);
 			String nombreCompleto = profesor.getNombre() + " " + profesor.getPrimerApellido() + " " + profesor.getSegundoApellido();
 			model.addAttribute("titulo", nombreCompleto.concat(" / Grupos"));
 		} else {
@@ -135,6 +136,14 @@ public class GrupoController {
 		grupoService.save(grupo);
 		sessionStatus.setComplete();
 		return "redirect:/carreras/" + idCarrera.toString() + "/sabana.jsp";
+	}
+	
+	
+	@GetMapping(value="/sabana.jsp")
+	@PreAuthorize("hasAnyAuthority('PROFESOR')")
+	public String mostrarSabana(Model model, Authentication authentication) {
+		Usuario usuario = usuarioService.findByUsername(authentication.getName());
+		return "redirect:/carreras/" + usuario.getIdCarrera().toString() + "/sabana.jsp";
 	}
 	
 	@GetMapping(value="/carreras/{idCarrera}/grupos/{id}/eliminar.jsp")
