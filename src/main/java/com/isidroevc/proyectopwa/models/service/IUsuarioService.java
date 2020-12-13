@@ -16,4 +16,8 @@ public interface IUsuarioService {
 	public void deleteById(Long id);
 	
 	public void asignarComoJefeDeCarrera(Long idCarrera);
+	
+	public List<Usuario> findByRole(String role);
+	
+	public Usuario findByUsername(String username);
 }

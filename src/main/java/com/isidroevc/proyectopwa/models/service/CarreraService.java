@@ -8,15 +8,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.isidroevc.proyectopwa.dao.ICarreraDao;
 import com.isidroevc.proyectopwa.models.entity.Carrera;
-import com.isidroevc.proyectopwa.models.entity.Role;
 import com.isidroevc.proyectopwa.models.entity.Usuario;
 @Service
 public class CarreraService implements ICarreraService{
 	@Autowired
 	private ICarreraDao carreraDao;
 	
-	@Autowired
-	private IRoleDao roleDao;
 	
 	@Autowired
 	private IUsuarioDao usuarioDao;
@@ -30,31 +27,11 @@ public class CarreraService implements ICarreraService{
 	@Override
 	@Transactional
 	public void save(Carrera carreraNew) {
-		Long idJefeNew = carreraNew.getIdJefe();
-		if (carreraNew.getId() != null && carreraNew.getId() > 0L && idJefeNew != null && idJefeNew > 0L) {
-			Carrera carreraOld = carreraDao.findById(carreraNew.getId()).get();
-			Long idJefeOld = carreraOld != null ? carreraOld.getIdJefe() : null;
-			if (idJefeOld != null && idJefeOld > 0) {
-				roleDao.deleteByIdCarrera(carreraNew.getId());
-				asignarCarrera(idJefeNew, carreraNew.getId());
-			}
-			carreraDao.save(carreraNew);
-		} else {
-			carreraDao.save(carreraNew);
-			asignarCarrera(idJefeNew, carreraNew.getId());
-		}
+		carreraDao.save(carreraNew);
+		
 	}
-	private void asignarCarrera(Long idJefeNew, Long idCarreraNew) {
-		Usuario jefeNew = usuarioDao.findById(idJefeNew).get();
-		Role newRole = new Role();
-		newRole.setAuthority("JEFE");
-		newRole.setIdCarrera(idCarreraNew);
-		newRole.setUserId(jefeNew.getId());
-		newRole.setUsername(jefeNew.getUsername());
-		roleDao.save(newRole);
-	}
-
 	@Override
+	@Transactional(readOnly=true)
 	public Carrera findById(Long id) {
 		return carreraDao.findById(id).get();
 		
@@ -64,6 +41,11 @@ public class CarreraService implements ICarreraService{
 	@Transactional
 	public void deleteById(Long id) {
 		carreraDao.deleteById(id);
+	}
+
+	@Override
+	public List<Carrera> findByIdJefe(Long idJefe) {
+		return carreraDao.findByIdJefe(idJefe);
 	}
 
 }

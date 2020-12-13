@@ -1,5 +1,6 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head th:fragment="head">
 	<link th:href="@{/carrera/css/styles.css}" href="/carrera/css/styles.css" rel="stylesheet" />
@@ -21,17 +22,18 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+          <li class="nav-item active" sec:authorize="hasAuthority('ADMINISTRADOR')">
+            <a class="nav-link" th:href="@{/carreras/listado.jsp}" >Carreras</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Features</a>
+          
+          
+          <li class="nav-item active" sec:authorize="hasAuthority('ADMINISTRADOR')">
+            <a class="nav-link" th:href="@{/profesores/listado.jsp}">Profesores</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Pricing</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+          
+          <!-- Opciones para el jefe de carrera -->
+          <li class="nav-item active" sec:authorize="hasAuthority('JEFE')">
+            <a class="nav-link" th:href="@{/carreras/menu.jsp}" >Mis carreras</a>
           </li>
         </ul>
       </div>

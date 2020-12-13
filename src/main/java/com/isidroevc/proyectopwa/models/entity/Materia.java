@@ -2,34 +2,22 @@ package com.isidroevc.proyectopwa.models.entity;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.annotations.Proxy;
-
 @Entity
-@Table(name = "carreras")
-@Proxy(lazy=false) 
-public class Carrera implements Serializable{
-
+@Table(name = "materias")
+public class Materia implements Serializable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
-	public Carrera() {
-		
-	}
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -40,20 +28,12 @@ public class Carrera implements Serializable{
 	@NotEmpty
 	private String clave;
 	
-	@Column(name = "id_jefe")
-	private Long idJefe;
+	@NotNull
+	private Long idCarrera;
 	
-	public Usuario getJefe() {
-		return jefe;
-	}
-
-	public void setJefe(Usuario jefe) {
-		this.jefe = jefe;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_jefe", referencedColumnName = "id",  insertable=false, updatable=false)
-	private Usuario jefe;
+	@NotNull
+	Integer creditos;
+	
 
 	public Long getId() {
 		return id;
@@ -79,12 +59,19 @@ public class Carrera implements Serializable{
 		this.clave = clave;
 	}
 
-	public Long getIdJefe() {
-		return idJefe;
+	public Long getIdCarrera() {
+		return idCarrera;
 	}
 
-	public void setIdJefe(Long idJefe) {
-		this.idJefe = idJefe;
+	public void setIdCarrera(Long idCarrera) {
+		this.idCarrera = idCarrera;
 	}
-	
+
+	public Integer getCreditos() {
+		return creditos;
+	}
+
+	public void setCreditos(Integer creditos) {
+		this.creditos = creditos;
+	}
 }

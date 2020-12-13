@@ -15,7 +15,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.isidroevc.proyectopwa.models.entity.Role;
 import com.isidroevc.proyectopwa.models.entity.Usuario;
 
 
@@ -38,13 +37,10 @@ public class JpaUserDetailsService implements UserDetailsService{
         	logger.error("Error en el Login: no existe el usuario '" + username + "' en el sistema!");
         	throw new UsernameNotFoundException("Username: " + username + " no existe en el sistema!");
         }
-        
+        logger.info("Is user enabled: ".concat(usuario.getEnabled().toString()));
         List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
         
-        for(Role role: usuario.getRoles()) {
-        	logger.info("Role: ".concat(role.getAuthority()));
-        	authorities.add(new SimpleGrantedAuthority(role.getAuthority()));
-        }
+        authorities.add(new SimpleGrantedAuthority(usuario.getRole()));
         
         if(authorities.isEmpty()) {
         	logger.error("Error en el Login: Usuario '" + username + "' no tiene roles asignados!");

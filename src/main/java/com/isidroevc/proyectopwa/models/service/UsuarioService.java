@@ -47,8 +47,21 @@ public class UsuarioService implements IUsuarioService {
 	}
 	
 	@Transactional
-	public void ascenderAJefeDeCarrera(Long id) {
-		
+	public void saveProfesor(Usuario newProfesor) {
+		Long idNewProfesor = newProfesor.getId();
+		if (idNewProfesor != null && idNewProfesor > 0L) {
+			
+		}
+	}
+
+	@Override
+	public List<Usuario> findByRole(String role) {
+		return usuarioDao.findByRole(role);
+	}
+	
+	@Override
+	public Usuario findByUsername(String username) {
+		return usuarioDao.findByUsername(username);
 	}
 
 }

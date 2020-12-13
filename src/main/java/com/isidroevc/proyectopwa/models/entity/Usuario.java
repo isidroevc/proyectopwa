@@ -11,13 +11,17 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
+import org.hibernate.annotations.Proxy;
+
 
 @Entity
 @Table(name = "users")
+@Proxy(lazy=false) 
 public class Usuario implements Serializable{
 
 	/**
@@ -33,22 +37,28 @@ public class Usuario implements Serializable{
 	@Column(length = 30, unique = true)
 	private String username;
 
-	@Column(length = 60)
+	@Column(length = 60, updatable=false)
 	private String password;
 
 	private Boolean enabled;
-	@NotEmpty
+	
 	@Column(name="nombre")
 	private String nombre;
-	@NotEmpty
+	
 	@Column(name="primer_apellido")
 	private String primerApellido;
-	@NotEmpty
+	
 	@Column(name="segundo_apellido")
 	private String segundoApellido;
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "user_id")
-	private List<Role> roles;
+	
+	@Column(name="id_carrera")
+	private Long idCarrera;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_carrera", referencedColumnName = "id",  insertable=false, updatable=false)
+	private Carrera carrera;
+	@Column(name="role")
+	private String role;
 
 	public Long getId() {
 		return id;
@@ -57,7 +67,7 @@ public class Usuario implements Serializable{
 	public void setId(Long id) {
 		this.id = id;
 	}
-
+	@NotEmpty
 	public String getUsername() {
 		return username;
 	}
@@ -65,15 +75,15 @@ public class Usuario implements Serializable{
 	public void setUsername(String username) {
 		this.username = username;
 	}
-
+	
 	public String getPassword() {
 		return password;
 	}
-
+	
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
+	
 	public Boolean getEnabled() {
 		return enabled;
 	}
@@ -81,15 +91,7 @@ public class Usuario implements Serializable{
 	public void setEnabled(Boolean enabled) {
 		this.enabled = enabled;
 	}
-
-	public List<Role> getRoles() {
-		return roles;
-	}
-
-	public void setRoles(List<Role> roles) {
-		this.roles = roles;
-	}
-
+	@NotEmpty
 	public String getNombre() {
 		return nombre;
 	}
@@ -97,7 +99,7 @@ public class Usuario implements Serializable{
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-
+	@NotEmpty
 	public String getPrimerApellido() {
 		return primerApellido;
 	}
@@ -105,7 +107,7 @@ public class Usuario implements Serializable{
 	public void setPrimerApellido(String primerApellido) {
 		this.primerApellido = primerApellido;
 	}
-
+	@NotEmpty
 	public String getSegundoApellido() {
 		return segundoApellido;
 	}
@@ -113,8 +115,30 @@ public class Usuario implements Serializable{
 	public void setSegundoApellido(String segundoApellido) {
 		this.segundoApellido = segundoApellido;
 	}
-	
-	
+
+	public Long getIdCarrera() {
+		return idCarrera;
+	}
+
+	public void setIdCarrera(Long idCarrera) {
+		this.idCarrera = idCarrera;
+	}
+
+	public Carrera getCarrera() {
+		return carrera;
+	}
+
+	public void setCarrera(Carrera carrera) {
+		this.carrera = carrera;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
 	
 	
 }

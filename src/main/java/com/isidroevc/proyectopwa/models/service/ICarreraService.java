@@ -2,6 +2,8 @@ package com.isidroevc.proyectopwa.models.service;
 
 
 
+import java.util.List;
+
 import com.isidroevc.proyectopwa.models.entity.Carrera;
 
 public interface ICarreraService {
@@ -12,4 +14,6 @@ public interface ICarreraService {
 	public Carrera findById(Long id);
 	
 	public void deleteById(Long id);
+	
+	public List<Carrera> findByIdJefe(Long idJefe);
 }
