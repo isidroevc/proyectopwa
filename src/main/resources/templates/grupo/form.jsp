@@ -18,7 +18,6 @@
           <div class="form-group">
             <label for="idProfesor">Profesor</label>
             <select th:field="*{idProfesor}" id="idProfesor" class="form-control">
-              <option value="0">Seleccionar Profesor</option>
               <option th:each="profesor : ${profesores}" th:value="${profesor.id}"
                 th:text="${profesor.nombre} + ' ' + ${profesor.primerApellido}"
                 th:selected="${grupo.idProfesor == profesor.id}"></option>
@@ -30,7 +29,6 @@
           <div class="form-group">
             <label for="idMateria">Materia</label>
             <select th:field="*{idMateria}" id="idMateria" class="form-control">
-              <option value="0">Seleccionar Materia</option>
               <option th:each="materia : ${materias}" th:value="${materia.id}" th:text="${materia.nombre}"
                 th:selected="${grupo.idMateria == materia.id}"></option>
             </select>
@@ -41,29 +39,36 @@
           <div class="form-group">
             <label for="idHorario">Horario</label>
             <select th:field="*{idHorario}" id="idHorario" class="form-control">
-              <option value="0">Seleccionar Horario</option>
-              <option th:each="horario : ${horarios}" th:value="${horario.id}" th:text="${horario.detalle}"
+              <option th:each="horario : ${horarios}" th:value="${horario.id}" th:text="${horario.dias} + ' - ' + ${horario.detalle}"
                 th:selected="${grupo.idHorario == horario.id}"></option>
             </select>
-            <small class="form-text text-danger" th:if="${#fields.hasErrors('idHorario')}"
-              th:errors="*{idHorario}"></small>
+            <small class="form-text text-danger" th:if="${empalme}"
+              th:text="'El horario se empalma'"></small>
           </div>
 
           <div class="form-group">
-            <label for="idHorario">Horario</label>
-            <select th:field="*{idHorario}" id="idHorario" class="form-control">
-              <option value="0">Seleccionar Horario</option>
-              <option th:each="horario : ${horarios}" th:value="${horario.id}" th:text="${horario.detalle}"
-                th:selected="${grupo.idHorario == horario.id}"></option>
+            <label for="semestre">Semestre</label>
+            <select th:field="*{semestre}" id="idHorario" class="form-control">
+              <option value="1">1</option>
+              <option value="2">0</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+              <option value="11">11</option>
+              <option value="12">12</option>
             </select>
-            <small class="form-text text-danger" th:if="${#fields.hasErrors('idHorario')}"
-              th:errors="*{idHorario}"></small>
+            <small class="form-text text-danger" th:if="${#fields.hasErrors('semestre')}"
+              th:errors="*{semestre}"></small>
           </div>
 
           <div class="form-group">
             <label for="idAula">Aula</label>
             <select th:field="*{idAula}" id="idAula" class="form-control">
-              <option value="0">Seleccionar Aula</option>
               <option th:each="aula : ${aulas}" th:value="${aula.id}" th:text="${aula.nombre}"
                 th:selected="${grupo.idAula == aula.id}"></option>
             </select>
@@ -73,7 +78,6 @@
           <div class="form-group">
             <label for="grupo">Grupo</label>
             <select th:field="*{grupo}" id="grupo" class="form-control">
-              <option value="">Seleccionar Grupo</option>
               <option value="A">A</option>
               <option value="B">B</option>
               <option value="C">C</option>
@@ -81,6 +85,11 @@
               <option value="E">E</option>
             </select>
             <small class="form-text text-danger" th:if="${#fields.hasErrors('grupo')}" th:errors="*{grupo}"></small>
+          </div>
+          <div class="form-group">
+            <label for="nombre">Numero de alumnos</label>
+            <input th:field="*{numeroAlumnos}" type="number" class="form-control" id="numeroAlumnos" required min=10 max=35>
+            <small class="form-text text-danger" th:if="${#fields.hasErrors('numeroAlumnos')}" th:errors="*{numeroAlumnos}"></small>
           </div>
           <button type="submit" class="btn btn-primary">Guardar</button>
         </form>

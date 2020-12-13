@@ -31,5 +31,17 @@ public class ProfesorTieneMateriaConHorarioService implements IProfesorTieneMate
 	public List<ProfesorTieneMateriaConHorario> findByIdProfesor(Long idProfesor) {
 		return profesorTieneMateriaConHorarioDao.findByIdProfesor(idProfesor);
 	}
+	
+	@Override
+	@Transactional(readOnly=true)
+	public ProfesorTieneMateriaConHorario findByIdProfesorAndIdHorario(Long idProfesor, Long idHorario) {
+		return profesorTieneMateriaConHorarioDao.findByIdProfesorAndIdHorario(idProfesor, idHorario);
+	}
+
+	@Override
+	@Transactional
+	public void deleteById(Long id) {
+		profesorTieneMateriaConHorarioDao.deleteById(id);
+	}
 
 }

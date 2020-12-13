@@ -7,6 +7,8 @@ create table users (
   id int primary key AUTO_INCREMENT,
   role varchar(60) not null,
   username varchar(30) unique,
+  email varchar(100) unique,
+  telefono varchar(25) unique,
   id_carrera int,
   password varchar(255),
   enabled  tinyint,
@@ -86,6 +88,7 @@ create table profesor_tiene_materia_en_horario_con_grupo(
 );
 
 
+
 /*inserts*/
 
 insert into carreras (nombre, clave) values('Ingeniería en Sistemas Computacionales', 'ISX-2010');
@@ -94,17 +97,17 @@ insert into carreras (nombre, clave) values('Ingeniería en Tecnologías de la I
 insert into materias (id_carrera, nombre, clave, creditos) values(2,'Cálculo Diferencial', 'SCD-2010', 5);
 insert into materias (id_carrera, nombre, clave, creditos) values(1,'Matemáticas Discretas', 'MTD-210', 5);
 /*admin*/
-insert into users (username, id_carrera, role, password, enabled, nombre, primer_apellido, segundo_apellido)
-  values('jose', 1, 'ADMINISTRADOR', '$2y$12$c41vAyFBea4o4zFcDOufleekG2FKph0z5iut51nCzHFPH6d1VCNB6', 1, 'Jose Gerardo', 'Carpio', 'Flores');
+insert into users (username, email, telefono, id_carrera, role, password, enabled, nombre, primer_apellido, segundo_apellido)
+  values('jose', 'jose@itleon.edu.mx', '4772394522', 1, 'ADMINISTRADOR', '$2y$12$c41vAyFBea4o4zFcDOufleekG2FKph0z5iut51nCzHFPH6d1VCNB6', 1, 'Jose Gerardo', 'Carpio', 'Flores');
 
-insert into users (username, id_carrera, role, password, enabled, nombre, primer_apellido, segundo_apellido)
-  values('antonio', 1, 'JEFE', '$2y$12$c41vAyFBea4o4zFcDOufleekG2FKph0z5iut51nCzHFPH6d1VCNB6', 1, 'Antonio', 'Aguila', 'Reyes');
+insert into users (username, email, telefono, id_carrera, role, password, enabled, nombre, primer_apellido, segundo_apellido)
+  values('antonio', 'antonio@itleon.edu.mx', '4772394521', 1, 'JEFE', '$2y$12$c41vAyFBea4o4zFcDOufleekG2FKph0z5iut51nCzHFPH6d1VCNB6', 1, 'Antonio', 'Aguila', 'Reyes');
 
-insert into users (username, id_carrera, role, password, enabled, nombre, primer_apellido, segundo_apellido)
-  values('luis', 2, 'ADMINISTRADOR', '$2y$12$c41vAyFBea4o4zFcDOufleekG2FKph0z5iut51nCzHFPH6d1VCNB6', 1, 'Luis Eduardo', 'Gutierrez', 'Ayala');
+insert into users (username, email, telefono, id_carrera, role, password, enabled, nombre, primer_apellido, segundo_apellido)
+  values('luis', 'luis@itleon.edu.mx', '4772394523', 2, 'ADMINISTRADOR', '$2y$12$c41vAyFBea4o4zFcDOufleekG2FKph0z5iut51nCzHFPH6d1VCNB6', 1, 'Luis Eduardo', 'Gutierrez', 'Ayala');
 
-insert into users (username, id_carrera, role, password, enabled, nombre, primer_apellido, segundo_apellido)
-  values('cirino', 2, 'ADMINISTRADOR', '$2y$12$c41vAyFBea4o4zFcDOufleekG2FKph0z5iut51nCzHFPH6d1VCNB6', 1, 'Cirino', 'Silva', 'Tovar');
+insert into users (username, email, telefono, id_carrera, role, password, enabled, nombre, primer_apellido, segundo_apellido)
+  values('cirino', 'cirino@itleon.edu.mx', '4772394524', 2, 'ADMINISTRADOR', '$2y$12$c41vAyFBea4o4zFcDOufleekG2FKph0z5iut51nCzHFPH6d1VCNB6', 1, 'Cirino', 'Silva', 'Tovar');
 
 update carreras set id_jefe = 2 where true;
 

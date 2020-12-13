@@ -22,6 +22,10 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
+
+          <li class="nav-item active">
+            <a class="nav-link" th:href="@{/usuarios/perfil.jsp}" sec:authorize="isAuthenticated()">Mi perfil</a>
+          </li>
           <li class="nav-item active" sec:authorize="hasAuthority('ADMINISTRADOR')">
             <a class="nav-link" th:href="@{/carreras/listado.jsp}" >Carreras</a>
           </li>
@@ -36,6 +40,24 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
             <a class="nav-link" th:href="@{/carreras/menu.jsp}" >Mis carreras</a>
           </li>
         </ul>
+        <ul class="navbar-nav navbar-right">
+					<li sec:authorize="!isAuthenticated()"><a
+						class="btn btn-outline-primary" th:href="@{/login}">Sign In</a></li>
+
+					<li sec:authorize="isAuthenticated()" class="dropdown show">
+						<a class="btn btn-outline-primary dropdown-toggle" href="#"
+							role="button" id="dropdownMenuLink" data-toggle="dropdown"
+							aria-haspopup="true" aria-expanded="false"><span sec:authentication="name"></span></a>
+
+						<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+							<form id="logoutForm" th:action="@{/logout}" method="post">
+								<button class="dropdown-item" onclick="document.getElementById('logoutForm').submit();" type="submit">Sign Out</button>
+								<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+							</form>
+							
+						</div>
+					</li>
+				</ul>
       </div>
     </nav>
   </header>

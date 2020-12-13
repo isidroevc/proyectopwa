@@ -13,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
@@ -50,6 +52,12 @@ public class Usuario implements Serializable{
 	
 	@Column(name="segundo_apellido")
 	private String segundoApellido;
+	
+	@Column(name="email")
+	private String email;
+	
+	@Column(name="telefono")
+	private String telefono;
 	
 	@Column(name="id_carrera")
 	private Long idCarrera;
@@ -138,6 +146,32 @@ public class Usuario implements Serializable{
 
 	public void setRole(String role) {
 		this.role = role;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getTelefono() {
+		return telefono;
+	}
+
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
+	}
+	
+	@PrePersist
+	private void PrePersist() {
+		this.password = "$2y$12$c41vAyFBea4o4zFcDOufleekG2FKph0z5iut51nCzHFPH6d1VCNB6";
+	}
+	
+	@PreUpdate
+	private void PreUpdate() {
+		this.password = "$2y$12$c41vAyFBea4o4zFcDOufleekG2FKph0z5iut51nCzHFPH6d1VCNB6";
 	}
 	
 	

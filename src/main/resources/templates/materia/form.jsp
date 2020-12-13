@@ -24,7 +24,7 @@
           <small class="form-text text-danger" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></small>
         </div>
         <div class="form-group">
-          <label for="nombre">CrÃ©ditos</label>
+          <label for="nombre">Créditos</label>
           <input th:field="*{creditos}" type="number" class="form-control" id="creditos" required min=4 max=6>
           <small class="form-text text-danger" th:if="${#fields.hasErrors('creditos')}" th:errors="*{creditos}"></small>
         </div>

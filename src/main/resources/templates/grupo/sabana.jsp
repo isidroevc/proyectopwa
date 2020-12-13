@@ -16,8 +16,27 @@
         class="btn btn-primary ">Crear grupo</button> </a>
       </a>
     </div>
+
+    <div class="card bg-light" sec:authorize="hasAuthority('JEFE')">
+      <div class="card-header">Filtrar por profesor</div>
+      <div class="card-body table-responsive">
+        <form class="form" th:action="@{/carreras/} + ${carrera.id} + '/sabana.jsp'" method="GET">
+          <div class="form-group">
+            <label for="idProfesor">Profesor</label>
+            <select name="idProfesor" id="idProfesor" class="form-control">
+              <option value="0">Sin filtro</option>
+              <option th:each="profesor : ${profesores}" th:value="${profesor.id}" th:text="${profesor.nombre} + ' ' + ${profesor.primerApellido}" th:selected="${idProfesorActual == profesor.id}"></option>
+            </select>
+          </div>
+          <button class="btn btn-primary">
+            Filtrar
+          </button>
+        </form>
+      </div>
+    </div>
+
     <div class="card bg-light">
-      <div class="card-header">Crear nuevo grupo</div>
+      <div class="card-header">Sábana</div>
       <div class="card-body table-responsive">
         <table class="table" id="table">
           <thead>
@@ -51,7 +70,7 @@
               <td th:text="${grupo.materia.nombre}"></td>
               <td th:text="${grupo.carrera.nombre}"></td>
               <td
-                th:text="${grupo.profesor.nombre} + ' ' + {grupo.profesor.primerApellido} + ' ' + {grupo.profesor.segundoApellido}">
+                th:text="${grupo.profesor.nombre} + ' ' + ${grupo.profesor.primerApellido} + ' ' + ${grupo.profesor.segundoApellido}">
               </td>
               <td th:text="'Agosto - Diciembre'"></td>
               <td th:text="${grupo.horario.turno}"></td>
@@ -61,18 +80,20 @@
               <td th:text="${grupo.materia.creditos}"></td>
               <td th:text="${grupo.aula.nombre}"></td>
   
-              <td th:if="${grupo.horario.dias == 'L-M-V'}">${grupo.horario.detalle}</td>
+              <td th:if="${grupo.horario.dias == 'L-M-V'}" th:text="${grupo.horario.detalle}"></td>
               <td th:if="${grupo.horario.dias == 'L-M-V'}"></td>
-              <td th:if="${grupo.horario.dias == 'L-M-V'}">${grupo.horario.detalle}</td>
+              <td th:if="${grupo.horario.dias == 'L-M-V'}" th:text="${grupo.horario.detalle}"></td>
               <td th:if="${grupo.horario.dias == 'L-M-V'}"></td>
-              <td th:if="${grupo.horario.dias == 'L-M-V'}">${grupo.horario.detalle}</td>
+              <td th:if="${grupo.horario.dias == 'L-M-V'}" th:text="${grupo.horario.detalle}"></td>
   
   
               <td th:if="${grupo.horario.dias == 'Ma-J-V'}"></td>
-              <td th:if="${grupo.horario.dias == 'Ma-J-V'}">${grupo.horario.detalle}</td>
+              <td th:if="${grupo.horario.dias == 'Ma-J-V'}" th:text="${grupo.horario.detalle}" ></td>
               <td th:if="${grupo.horario.dias == 'Ma-J-V'}"></td>
-              <td th:if="${grupo.horario.dias == 'Ma-J-V'}">${grupo.horario.detalle}</td>
-              <td th:if="${grupo.horario.dias == 'Ma-J-V'}">${grupo.horario.detalle}</td>
+              <td th:if="${grupo.horario.dias == 'Ma-J-V'}" th:text="${grupo.horario.detalle}" ></td>
+              <td th:if="${grupo.horario.dias == 'Ma-J-V'}" th:text="${grupo.horario.detalle}" ></td>
+               <td> <a th:href="@{/carreras/} + ${carrera.id} + '/grupos/' + ${grupo.id}+ '/eliminar.jsp'"><button
+                  class="btn btn-danger" onclick="return confirm('Estas seguro de eliminar este grupo?')">Eliminar</button></a> </td>
             </tr>
           </tbody>
         </table>

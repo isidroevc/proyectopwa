@@ -8,4 +8,6 @@ public interface IProfesorTieneMateriaConHorarioService {
 	public void save(ProfesorTieneMateriaConHorario profesorTieneMateriaConHorario);
 	public List<ProfesorTieneMateriaConHorario> findByIdCarrera(Long idCarrera);
 	public List<ProfesorTieneMateriaConHorario> findByIdProfesor(Long idProfesor);
+	public ProfesorTieneMateriaConHorario findByIdProfesorAndIdHorario(Long idProfesor, Long idHorario);
+	public void deleteById(Long id);
 }
