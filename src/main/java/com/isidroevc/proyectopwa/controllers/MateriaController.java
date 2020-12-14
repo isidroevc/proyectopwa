@@ -13,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
@@ -62,6 +63,18 @@ public class MateriaController {
 		return "materia/form";
 	}
 	
+	@GetMapping(value="/carreras/{idCarrera}/materias/formCSV.jsp")
+	public String mostrarFormularioParaCreacionconCSV(@PathVariable Long idCarrera, Model model, Authentication authentication) {
+		Usuario usuario = usuarioService.findByUsername(authentication.getName());
+		Carrera carrera = carreraService.findById(idCarrera);
+		if (!carrera.getIdJefe().equals(usuario.getId())) {
+			return "redirect:/";
+		}
+		model.addAttribute("carrera", carrera);
+		model.addAttribute("titulo", "Agregar materias con archivo CSV");
+		return "materia/formCSV";
+	}
+	
 	@GetMapping(value="/carreras/{idCarrera}/materias/{id}/form.jsp")
 	public String mostrarFormularioParaEdicion(@PathVariable Long idCarrera, @PathVariable Long id, Model model, Authentication authentication) {
 		Usuario usuario = usuarioService.findByUsername(authentication.getName());
@@ -90,6 +103,28 @@ public class MateriaController {
 		materia.setIdCarrera(idCarrera);
 		materiaService.save(materia);
 		sessionStatus.setComplete();
+		return "redirect:/carreras/" + idCarrera.toString() + "/materias.jsp";
+	}
+	
+	@PostMapping(value="/carreras/{idCarrera}/materias/formCSV.jsp")
+	public String guardarDesdeCSV(@RequestParam String claves, @RequestParam String nombres,@RequestParam String creditos, Model model, @PathVariable Long idCarrera, Authentication authentication) {
+		Usuario usuario = usuarioService.findByUsername(authentication.getName());
+		Carrera carrera = carreraService.findById(idCarrera);
+		if (!carrera.getIdJefe().equals(usuario.getId())) {
+			return "redirect:/";
+		}
+		String[] clavesSeparadas = claves.split(",");
+		String[] nombresSeparados = nombres.split(",");
+		String[] creditosSeparados = creditos.split(",");
+		int numeroDeMateriasACrear = clavesSeparadas.length;
+		for(int i = 0; i < numeroDeMateriasACrear; i++) {
+			Materia materia = new Materia();
+			materia.setIdCarrera(idCarrera);
+			materia.setClave(clavesSeparadas[i]);
+			materia.setNombre(nombresSeparados[i]);
+			materia.setCreditos(Integer.parseInt(creditosSeparados[i].trim()));
+			materiaService.save(materia);
+		}
 		return "redirect:/carreras/" + idCarrera.toString() + "/materias.jsp";
 	}
 }

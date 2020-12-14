@@ -17,12 +17,8 @@
     </div>
     <div class="row">
       <div class="container">
-        <form action="@{/carreras/} + ${carrera.id} + '/materias/filepreview.jsp" class="form" method="POST">
-          <input type="file" class="" name="file" required>
-          <button class="btn btn-primary" onclick="return dialog('Esta seguro de querer subir el archivo?')">
-            Subir archivo
-          </button>
-        </form>
+	<a th:href="@{/carreras/} + ${carrera.id} + '/materias/formCSV.jsp'" class="col-md-1"> <button
+          class="btn btn-primary ">Cargar materias desde CSV</button> </a>
       </div>
     </div>
     <div class="row">
