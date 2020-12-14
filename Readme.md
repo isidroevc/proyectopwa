@@ -39,7 +39,7 @@ Una vez tenga los anteriores puntos cubiertos proceda con los siguientes pasos.
 ```
 
 Deberá eventualmente tener un resultado similar al siguiente en la terminal.
-![alt text](./images/images.png "Aplicacion corriendo en la terminal")
+![alt text](./images/terminal.png "Aplicacion corriendo en la terminal")
 
 A partir de aquí se puede ingresar a la url que se indica en la consola.
 
