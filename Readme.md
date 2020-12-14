@@ -31,6 +31,8 @@ Para correr la aplicación necesitará tener cubiertos los siguientes puntos:
 2. Tener un servidor de MySQL, al que se tenga acceso para crear la base de datos correspondiente (Es necesario que ejecute el script llamado database.sql en su servidor).
 3. Una vez cuente con su servidor MySQL debe ajustar el archivo application.properties con los datos de conexión que correspondan a su servidor.
 
+4. Tambien puede correr la aplicación con docker compose.
+
 Una vez tenga los anteriores puntos cubiertos proceda con los siguientes pasos.
 
 #### Ejecutar la aplicación con maven.
@@ -38,10 +40,24 @@ Una vez tenga los anteriores puntos cubiertos proceda con los siguientes pasos.
 ./mvnw spring-boot:run
 ```
 
+#### Ejecutar la aplicación con docker compose.
+1. Muévase a la carpeta Docker
+2. Ejecute el siguiente comando
+
+```
+docker-compose up -d
+```
+
 Deberá eventualmente tener un resultado similar al siguiente en la terminal.
 ![alt text](./images/terminal.png "Aplicacion corriendo en la terminal")
 
 A partir de aquí se puede ingresar a la url que se indica en la consola.
+
+
+### Base de datos normalizada.
+![alt text](./images/database.PNG "Diagrama de base de datos")
+
+
 
 ### Puntos que se podrían mejorara de la aplicación.
 1. Mejorar el aspecto de la interfaz de usuario.
