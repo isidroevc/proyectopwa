@@ -45,7 +45,7 @@ public class CarreraController {
 	@GetMapping("/form.jsp")
 	public String mostrarFormularioCreacion(Model model) {
 		Carrera carrera = new Carrera();
-		List<Usuario> usuarios = usuarioService.findAll();
+		List<Usuario> usuarios = usuarioService.findByRole("JEFE");
 		model.addAttribute("usuarios", usuarios);
 		model.addAttribute("titulo", "Agregar carrera");
 		model.addAttribute("carrera", carrera);

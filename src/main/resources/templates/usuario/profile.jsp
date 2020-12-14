@@ -58,7 +58,7 @@
           <label for="idCarrerea">Carrera</label>
           <select th:field="*{idCarrera}" id="idCarrera" class="form-control" disabled>
             <option th:each="carrera : ${carreras}" th:value="${carrera.id}" th:text="${carrera.nombre}"
-              th:selected="${profesor.idCarrera== carrera.id}"></option>
+              th:selected="${profesor.idCarrera == carrera.id}"></option>
           </select>
           <small class="form-text text-danger" th:if="${#fields.hasErrors('idCarrera')}"
             th:errors="*{idCarrera}"></small>

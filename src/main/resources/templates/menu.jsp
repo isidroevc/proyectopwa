@@ -21,11 +21,7 @@
   </header>
   
  	<div class="container">
-    <h1>Menú</h1>
-    <div class="menu-container">
-      <button class="btn btn-primary btn-menu">Carreras</button>
-      <button class="btn btn-primary btn-menu">Profesores</button>
-    </div>
+
   </div>
 
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"

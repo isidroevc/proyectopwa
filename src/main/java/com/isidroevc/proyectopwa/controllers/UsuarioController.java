@@ -7,16 +7,22 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.isidroevc.proyectopwa.models.entity.Usuario;
+import com.isidroevc.proyectopwa.models.service.ICarreraService;
 import com.isidroevc.proyectopwa.models.service.IUsuarioService;
 
 @Controller
 public class UsuarioController {
 	@Autowired
 	IUsuarioService usuarioService;
+	
+	@Autowired
+	ICarreraService carreraService;
 	@GetMapping(value="/usuarios/perfil.jsp")
 	public String mostrarPerfil(Model model, Authentication authentication) {
 		Usuario usuario = usuarioService.findByUsername(authentication.getName());
+		
 		model.addAttribute("titulo", "Perfil del usuario");
+		model.addAttribute("carreras", carreraService.findAll());
 		model.addAttribute("profesor", usuario);
 		return "usuario/profile";
 	}

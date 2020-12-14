@@ -37,7 +37,7 @@
             <td th:text="${materia.nombre}"></td>
             <td> <a th:href="@{/carreras/} + ${carrera.id} + '/materias/' + ${materia.id}+ '/form.jsp'"><button
                   class="btn btn-warning">Editar</button></a> </td>
-            <td> <a th:href="@{/carreras/} + ${materia.id}"><button class="btn btn-danger">Eliminar</button></a> </td>
+            <td> <a onclick ="return confirm('Esta seguro de borrar esta materia?')" th:href="@{/carreras/} + ${carrera.id} + '/materias/' + ${materia.id} + '/delete'"><button class="btn btn-danger">Eliminar</button></a> </td>
           </tr>
         </tbody>
       </table>

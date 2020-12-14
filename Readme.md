@@ -44,6 +44,5 @@ Deberá eventualmente tener un resultado similar al siguiente en la terminal.
 A partir de aquí se puede ingresar a la url que se indica en la consola.
 
 ### Puntos que se podrían mejorara de la aplicación.
-1. Implementar la subida de archivos csv.
-2. Mejorar el aspecto de la interfaz de usuario.
-3. Mejorar la manera en la que se construye la imagen de docker.
+1. Mejorar el aspecto de la interfaz de usuario.
+2. Mejorar la manera en la que se construye la imagen de docker.

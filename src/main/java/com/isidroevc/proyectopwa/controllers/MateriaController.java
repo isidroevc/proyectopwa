@@ -127,4 +127,15 @@ public class MateriaController {
 		}
 		return "redirect:/carreras/" + idCarrera.toString() + "/materias.jsp";
 	}
+
+	@GetMapping(value="/carreras/{idCarrera}/materias/{id}/delete")
+	public String mostrarFormularioParaEdicion(@PathVariable Long idCarrera, @PathVariable Long id, Authentication authentication) {
+		Usuario usuario = usuarioService.findByUsername(authentication.getName());
+		Carrera carrera = carreraService.findById(idCarrera);
+		if (!carrera.getIdJefe().equals(usuario.getId())) {
+			return "redirect:/";
+		}
+		materiaService.deleteById(id);
+		return "redirect:/carreras/" + idCarrera.toString() + "/materias.jsp";
+	}
 }
